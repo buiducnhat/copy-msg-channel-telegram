@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "dotenv": "^14.3.2",
+    "input": "^1.0.1",
+    "mongoose": "^6.1.8",
+    "telegram": "^2.4.3",
+    "validator": "^13.7.0"
+  }
+}
