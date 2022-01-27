@@ -6,7 +6,7 @@ require('dotenv').config();
 const SignalModel = require('./models/signal.model');
 const signalModel = require('./models/signal.model');
 
-const srcChannelId = process.env.SOURCE_CHANNEL_ID;
+const srcChannelIds = process.env.SOURCE_CHANNEL_ID.split(' ');
 const desChannelId = process.env.DESTINATION_CHANNEL_ID;
 const apiId = Number.parseInt(process.env.API_ID);
 const apiHash = process.env.API_HASH;
@@ -45,7 +45,7 @@ async function handleSrcMsg(event) {
 
   // if the message from source channel
   const channelId = '-' + message?.peerId?.channelId?.value?.toString();
-  if (channelId === srcChannelId) {
+  if (srcChannelIds.includes(channelId)) {
     // check if this is new message (no replyTo)
     if (!message.replyTo) {
       // send message to des channel before saving to db
@@ -63,7 +63,7 @@ async function handleSrcMsg(event) {
     } else {
       // find the root message
       const rootSignal = await signalModel.findOne({
-        srcChannelId,
+        srcChannelId: channelId,
         srcMsgId: message.replyTo.replyToMsgId,
       });
       // send message
