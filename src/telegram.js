@@ -4,7 +4,6 @@ const input = require('input');
 require('dotenv').config();
 
 const SignalModel = require('./models/signal.model');
-const signalModel = require('./models/signal.model');
 
 const srcChannelIds = process.env.SOURCE_CHANNEL_ID.split(' ');
 const desChannelId = process.env.DESTINATION_CHANNEL_ID;
@@ -62,7 +61,7 @@ async function handleSrcMsg(event) {
       await signal.save();
     } else {
       // find the root message
-      const rootSignal = await signalModel.findOne({
+      const rootSignal = await SignalModel.findOne({
         srcChannelId: channelId,
         srcMsgId: message.replyTo.replyToMsgId,
       });
