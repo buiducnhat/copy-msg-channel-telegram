@@ -1,4 +1,5 @@
 {
+  "name": "copy-msg-channel-telegram",
   "dependencies": {
     "dotenv": "^14.3.2",
     "input": "^1.0.1",

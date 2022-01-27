@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
-const dbname = process.env.DB_DBNAME;
-
 class Database {
   constructor() {
     this._connect();
@@ -12,9 +8,7 @@ class Database {
 
   _connect() {
     mongoose
-      .connect(
-        `mongodb+srv://${username}:${password}@${username}.syjjh.mongodb.net/${dbname}?retryWrites=true&w=majority`
-      )
+      .connect(process.env.MONGODB_URI)
       .then(() => {
         console.log('Database connection successful');
       })
